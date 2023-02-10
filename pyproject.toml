@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "kamilimu-demo"
+version = "0.1.0"
+description = ""
+authors = ["Sidney Ochieng <princelySid@gmail.com>"]
+readme = "README.md"
+packages = [{include = "kamilimu_demo"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^1.5.3"
+numpy = "^1.24.2"
+python-dotenv = "^0.21.1"
+scikit-learn = "^1.2.1"
+fastapi = "^0.91.0"
+matplotlib = "^3.6.3"
+uvicorn = "^0.20.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+flake8 = "^6.0.0"
+ipykernel = "^6.21.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
