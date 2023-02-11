@@ -5,7 +5,9 @@ import pandas as pd
 
 
 def convert_data(data):
-    scaler = pickle.load(os.getenv("SCALER"))
-    data = pd.DataFrame.from_dict(data).T
+    with open(os.getenv("SCALER"), "rb") as f:
+        scaler = pickle.load(f)
+    data = pd.DataFrame.from_dict(data, orient="index")
+    data = data.T
     scaler.transform(data)
     return scaler.transform(data)

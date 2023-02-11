@@ -2,7 +2,7 @@ import os
 import pickle
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI
 
 from src.operations.example import convert_data
 from src.schemas import PredictData
@@ -14,9 +14,15 @@ app = FastAPI(
 )
 
 
+@app.get("/something")
+def something():
+    return "I am going to return a string"
+
+
 @app.post("/predict", tags=["predictions"])
-async def get_prediction(data: PredictData):
-    ml_model = pickle.load(os.getenv("ML_MODEL"))
+def get_prediction(data: PredictData):
+    with open(os.getenv("ML_MODEL"), "rb") as f:
+        ml_model = pickle.load(f)
     data = convert_data(data.dict())
     prediction = ml_model.predict(data)
-    return {"prediction": prediction}
+    return {"prediction": prediction[0]}
